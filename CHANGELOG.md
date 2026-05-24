@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 2.0.0 (2026-05-24)
+> This project is maintained by [MadDogWarner](https://maddogwarner.com) at [github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW).
+> Forked from [dvcol/homebridge-plugin-withings-sleep](https://github.com/dvcol/homebridge-plugin-withings-sleep) — prior release history below is preserved from the original repository.
+
+## [2.0.0](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/releases/tag/v2.0.0) (2026-05-24)
 
 
 ### Breaking Changes

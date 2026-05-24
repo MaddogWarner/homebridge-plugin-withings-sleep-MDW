@@ -16,6 +16,10 @@
     "type": "git",
     "url": "git+https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW.git"
   },
+  "author": {
+    "name": "MadDogWarner",
+    "url": "https://maddogwarner.com"
+  },
   "publishConfig": {
     "access": "public"
   },

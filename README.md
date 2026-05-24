@@ -45,14 +45,14 @@ Withings API / automation
 ### Via Homebridge Config UI X (recommended)
 
 1. Open the Homebridge UI in your browser
-2. Go to **Plugins** and search for `homebridge-plugin-withings-sleep`
+2. Go to **Plugins** and search for `homebridge-plugin-withings-sleep-mdw`
 3. Click **Install**
 4. Restart Homebridge when prompted
 
 ### Via command line
 
 ```bash
-npm install -g homebridge-plugin-withings-sleep
+npm install -g homebridge-plugin-withings-sleep-mdw
 ```
 
 ---
@@ -210,8 +210,10 @@ Restart Homebridge. If the plugin server failed to start (e.g. port conflict), t
 
 Issues and pull requests welcome at [github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW).
 
+Maintained by [MadDogWarner](https://maddogwarner.com).
+
 ---
 
 ## Licence
 
-[Apache 2.0](LICENSE) — forked from [dvcol/homebridge-plugin-withings-sleep](https://github.com/dvcol/homebridge-plugin-withings-sleep)
+[Apache 2.0](LICENSE) — maintained by [MadDogWarner](https://maddogwarner.com), forked from [dvcol/homebridge-plugin-withings-sleep](https://github.com/dvcol/homebridge-plugin-withings-sleep)

@@ -43,6 +43,8 @@ export default (api: API) => {
 
 type ServerConfig = { port?: number; ssl?: { key: string; cert: string } };
 
+const isNonEmptyString = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
+
 class WithingSleepSwitch implements AccessoryPlugin {
   private readonly log: Logging;
   private readonly name: string;
@@ -86,8 +88,8 @@ class WithingSleepSwitch implements AccessoryPlugin {
 
   initInformationService() {
     const service = new hap.Service.AccessoryInformation()
-      .setCharacteristic(hap.Characteristic.Manufacturer, 'Custom Manufacturer')
-      .setCharacteristic(hap.Characteristic.Model, 'Custom Model');
+      .setCharacteristic(hap.Characteristic.Manufacturer, 'Withings')
+      .setCharacteristic(hap.Characteristic.Model, 'Sleep Analyzer');
 
     this.log.info('Information service initializing!');
     return service;
@@ -99,8 +101,16 @@ class WithingSleepSwitch implements AccessoryPlugin {
   }
 
   async startServer({ port = 3000, ssl }: ServerConfig) {
-    const config: { logger: boolean; https?: SecureContextOptions } = { logger: true };
-    if (ssl?.cert && ssl?.key) {
+    if (!Number.isInteger(port) || port < 1 || port > 65535) {
+      throw new Error(`Invalid port: ${port}. Must be an integer between 1 and 65535.`);
+    }
+
+    const config: { logger: { level: 'warn' }; https?: SecureContextOptions } = { logger: { level: 'warn' } };
+    if (ssl) {
+      if (!isNonEmptyString(ssl.cert) || !isNonEmptyString(ssl.key)) {
+        throw new Error('SSL certificate and key paths must both be non-empty strings when SSL is configured.');
+      }
+
       this.log.info('Configuring server with SSL enabled');
       config.https = {
         key: readFileSync(ssl.key),
@@ -129,14 +139,8 @@ class WithingSleepSwitch implements AccessoryPlugin {
 
     this.log.info('Starting the server...');
 
-    try {
-      await app.listen({ port });
-      this.log.info(`Server listening on port '${port}'`);
-    } catch (err) {
-      const errorString = err instanceof Error ? err.message : err?.toString() ?? 'Unkown error';
-      this.log.error(errorString);
-      process.exit(1);
-    }
+    await app.listen({ port });
+    this.log.info(`Server listening on port '${port}'`);
   }
 
   constructor(log: Logging, config: AccessoryConfig) {
@@ -148,6 +152,7 @@ class WithingSleepSwitch implements AccessoryPlugin {
       this.log.info('Configuring allowed hosts:', this.hosts);
     } else {
       this.hosts = [];
+      // security: empty host allowlist intentionally permits simple unauthenticated webhook setups.
       this.log.warn('No hosts list provided, this might be unsafe');
     }
 
@@ -155,11 +160,26 @@ class WithingSleepSwitch implements AccessoryPlugin {
     this.occupancyService = this.initOccupancyService();
     this.informationService = this.initInformationService();
 
-    const serverConfig: ServerConfig = { port: Number(config.port) };
-    if (config.cert && config.key) {
+    const port = config.port ?? 3000;
+    if (!Number.isInteger(port) || port < 1 || port > 65535) {
+      throw new Error(`Invalid port: ${config.port}. Must be an integer between 1 and 65535.`);
+    }
+
+    const hasCert = isNonEmptyString(config.cert);
+    const hasKey = isNonEmptyString(config.key);
+    if (hasCert !== hasKey) {
+      throw new Error('SSL certificate and key paths must both be configured together.');
+    }
+
+    const serverConfig: ServerConfig = { port };
+    if (hasCert && hasKey) {
       serverConfig.ssl = { key: config.key, cert: config.cert };
     }
-    this.startServer(serverConfig);
+    this.startServer(serverConfig).catch(err => {
+      const errorString = err instanceof Error ? err.message : String(err ?? 'Unknown error');
+      this.log.error(errorString);
+      process.exit(1);
+    });
   }
 
   /*
@@ -167,7 +187,7 @@ class WithingSleepSwitch implements AccessoryPlugin {
    * Typical this only ever happens at the pairing process.
    */
   identify(): void {
-    this.log(PluginName);
+    this.log.info(PluginName);
   }
 
   /*

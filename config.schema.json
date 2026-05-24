@@ -13,9 +13,9 @@
       },
       "port": {
         "title": "Server Port",
-        "type": "string",
+        "type": "integer",
         "required": true,
-        "default": "3000"
+        "default": 3000
       },
       "hosts": {
         "title": "Authorized Hosts or Ips",

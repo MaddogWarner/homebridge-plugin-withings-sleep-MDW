@@ -1,8 +1,6 @@
 import { ContentType } from './http.model.js';
 
-import type { FastifyRequest } from 'fastify/types/request.js';
-
-import type { RouteHandler } from 'fastify/types/route.js';
+import type { FastifyRequest, RouteHandler } from 'fastify';
 
 type Endpoint = {
   uri: string;
@@ -55,6 +53,7 @@ export const getResponseHandler: (params: {
   ({ success, error }) =>
   async (request, reply) => {
     try {
+      // security: webhook endpoints rely on the configured host allowlist only; no additional authentication is enforced.
       await success(request);
       reply.status(200).type(ContentType.ApplicationJson).send();
     } catch (err) {

@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 2.0.0 (2026-05-24)
+
+
+### Breaking Changes
+
+* **runtime:** require Node.js 22.12 or 24.0 and later (was 18.17 or 20.9)
+* **schema:** port config type changed from string to integer — update `config.json` to use a bare number (e.g. `3000` not `"3000"`)
+* **server:** update Fastify from version 4 to version 5
+
+
+### Features
+
+* **homebridge:** add Homebridge 2.0 support while retaining Homebridge 1.6 compatibility
+* **schema:** define the webhook server port as an integer with a numeric default
+* **server:** validate port, SSL certificate, and SSL key configuration before startup
+
+
+### Bug Fixes
+
+* **deps:** fix the invalid `@types/node` version and update Vitest coverage packages
+* **homebridge:** handle asynchronous server startup errors from the accessory constructor
+* **metadata:** report Withings manufacturer and Sleep Analyzer model information
+* **server:** correct the unknown error fallback message
+
+
+### Security
+
+* **config:** reject invalid webhook listener ports outside the TCP port range
+* **ssl:** reject incomplete or empty SSL certificate and key path configuration
+* **logging:** reduce Fastify request logging to warnings and errors by default
+
 ### [1.2.1](https://github.com/dvcol/homebridge-plugin-withings-sleep/compare/v1.2.0...v1.2.1) (2024-05-24)
 
 

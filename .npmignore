@@ -6,8 +6,15 @@ src
 # gitHub actions
 .github
 
+# Internal scaffolding
+codex-plan.md
+
+# Environment / secrets
+env/
+
 # eslint
 .eslintrc
+.eslintrc.cjs
 
 # typescript
 tsconfig.json

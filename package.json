@@ -72,7 +72,9 @@
     "overrides": {
       "handlebars": "^4.7.9",
       "shell-quote": "^1.8.4",
-      "axios": "^1.16.0"
+      "axios": "^1.16.0",
+      "vite": ">=6.4.2",
+      "lodash": ">=4.18.0"
     }
   },
   "lint-staged": {

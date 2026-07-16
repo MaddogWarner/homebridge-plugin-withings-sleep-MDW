@@ -79,11 +79,6 @@ jobs:
         with:
           tag_name: ${{ inputs.tag-name || steps.push-tag.outputs.tag_name }}
           body_path: RELEASE.md
-
-  publish:
-    name: ☁️ Publish
-    needs: release
-    uses: ./.github/workflows/publish.yml
-    secrets: inherit
-    with:
-      tag-name: ${{ inputs.tag-name || needs.release.outputs.tag-name }}
+        # Publishing to npm is handled by publish.yml, triggered on the
+        # `release: published` event this step creates (requires CI_TOKEN — a PAT —
+        # so the release event fires downstream workflows).

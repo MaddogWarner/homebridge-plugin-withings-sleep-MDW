@@ -1,50 +1,44 @@
 name: ☁️ Publish
 
 on:
-  workflow_call:
-    inputs:
-      commit-hash:
-        description: Commit to checkout
-        required: false
-        type: string
-      tag-name:
-        description: Tag name
-        required: false
-        type: string
+  release:
+    types: [published]
   workflow_dispatch:
-    inputs:
-      commit-hash:
-        description: Commit to checkout
-        required: false
-        type: string
-      tag-name:
-        description: Tag name
-        required: false
-        type: string
 
 jobs:
-  publish-npm:
-    name: ☁️ Publish
+  publish:
+    name: ☁️ Publish to npm
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write # Required for npm OIDC trusted publishing
+
     steps:
-      - name: ⛙ Checkout branch ${{ github.ref }}
+      - name: ⛙ Checkout
         uses: actions/checkout@v7
         with:
-          ref: ${{ inputs.commit-hash || 'main' }}
           fetch-depth: 0
 
-      - name: 🚧 Build
+      - name: 🚧 Build (pnpm)
         uses: ./.github/actions/build
+        with:
+          node_version: '24'
+          pnpm_version: '9.1.0'
+
+      - name: 🟢 Set up Node.js for OIDC publish
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: ⬆️ Upgrade npm for trusted publishing
+        run: npm install -g npm@latest # OIDC trusted publishing requires npm >= 11.5.1
+
+      - name: 🧹 Remove placeholder auth token so npm uses OIDC
+        run: |
+          npmrc="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
+          [ -f "$npmrc" ] && sed -i '/_authToken/d; /always-auth/d' "$npmrc" || true
 
       - name: ☁️ Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          # =================  ☁️ Publish =================
-          # Check status
-          git status
-          git diff --color -U0 | cat
-          
-          # Publish
-          pnpm publish
+        run: npm publish --provenance --access public

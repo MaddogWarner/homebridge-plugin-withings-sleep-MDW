@@ -2,7 +2,7 @@
   "name": "homebridge-plugin-withings-sleep-mdw",
   "displayName": "Withings Sleep Homebridge Plugin (MDW)",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "packageManager": "pnpm@9.1.0",
   "description": "A simple plugin to expose withings sleep as an occupancy sensor",
   "keywords": [

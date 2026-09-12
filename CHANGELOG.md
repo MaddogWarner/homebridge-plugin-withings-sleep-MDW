@@ -2,8 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-> This project is maintained by [MadDogWarner](https://maddogwarner.com) at [github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW).
-> Forked from [dvcol/homebridge-plugin-withings-sleep](https://github.com/dvcol/homebridge-plugin-withings-sleep) — prior release history below is preserved from the original repository.
+### [2.0.3](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/compare/v2.0.2...v2.0.3) (2026-09-12)
+
+
+### Bug Fixes
+
+* align Vitest coverage dependency ([#50](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/issues/50)) ([efa5adb](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/commit/efa5adba222ea520ba301aa47fe8ba66b0312b35))
+* raise security override floors ([#51](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/issues/51)) ([530b1eb](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/commit/530b1eba88dd5d18136e8d2f3031ba32e3e7c0e3))
+* restore TypeScript lint compatibility ([#49](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/issues/49)) ([7f73111](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/commit/7f731117e3eecae1faf6520ddcec358b3c4edc68))
 
 ## [2.0.0](https://github.com/MaddogWarner/homebridge-plugin-withings-sleep-MDW/releases/tag/v2.0.0) (2026-05-24)
 

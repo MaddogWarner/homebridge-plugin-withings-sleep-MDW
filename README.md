@@ -1,6 +1,12 @@
-> [!WARNING]
-> **This project is deprecated.**
-> It is no longer maintained and will not receive further updates, bug fixes, or compatibility changes. It remains installable for now, but you should plan to migrate away — the repository may be archived and support removed entirely in a future update.
+> [!CAUTION]
+> **This project is deprecated and no longer maintained.**
+>
+> - **`2.0.3` is the final release.** It contains security fixes only. There will be no further releases — no features, no bug fixes, no compatibility work.
+> - The npm package [`homebridge-plugin-withings-sleep-mdw`](https://www.npmjs.com/package/homebridge-plugin-withings-sleep-mdw) is **deprecated on npm as of 13/09/2026**. Every published version carries a deprecation warning; `npm install` will tell you so.
+> - It remains installable and will keep working as-is, but it is not compatibility-tested beyond Homebridge 2.x and will not be updated if that changes.
+> - **This repository will be archived (made read-only) on or after 13/12/2026.** Issues and pull requests are no longer being accepted or actioned before then.
+>
+> If you rely on this plugin, please plan to migrate away. You are welcome to fork it — the licence permits it and no permission is needed.
 
 <p align="center">
   <img src="https://github.com/homebridge/branding/raw/latest/logos/homebridge-wordmark-logo-vertical.png" width="150" alt="Homebridge">

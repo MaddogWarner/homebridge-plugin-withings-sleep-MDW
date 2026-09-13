@@ -4,7 +4,7 @@
 > - **`2.0.3` is the final release.** It contains security fixes only. There will be no further releases — no features, no bug fixes, no compatibility work.
 > - The npm package [`homebridge-plugin-withings-sleep-mdw`](https://www.npmjs.com/package/homebridge-plugin-withings-sleep-mdw) is **deprecated on npm as of 13/09/2026**. Every published version carries a deprecation warning; `npm install` will tell you so.
 > - It remains installable and will keep working as-is, but it is not compatibility-tested beyond Homebridge 2.x and will not be updated if that changes.
-> - **This repository will be archived (made read-only) on or after 13/12/2026.** Issues and pull requests are no longer being accepted or actioned before then.
+> - **This repository is archived and read-only.** Issues and pull requests are closed and are not being accepted. The code remains available to read and to fork.
 >
 > If you rely on this plugin, please plan to migrate away. You are welcome to fork it — the licence permits it and no permission is needed.
 
